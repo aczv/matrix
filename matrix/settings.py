@@ -35,6 +35,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv(), default='')
 
 INSTALLED_APPS = [
     'matrix.hive.apps.HiveConfig',
+    'matrix.clothing.apps.ClothingConfig',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -141,3 +142,4 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 50,
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
 }
+

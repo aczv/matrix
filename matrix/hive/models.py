@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+class Server(models.Model):
+    name = models.CharField(max_length=100)
+
+class Site(models.Model):
+    name = models.CharField(max_length=100)

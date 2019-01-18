@@ -26,5 +26,6 @@ class ClothAdmin(admin.ModelAdmin):
 @admin.register(Reservation)
 class ReservationAdmin(admin.ModelAdmin):
     search_fields = ['branch']
-    list_display = ['branch', 'cloth', 'quantity']
+    list_filter = ['branch', 'size', 'confirmed']
+    list_display = ['branch', 'cloth', 'quantity', 'size', 'confirmed']
     list_display_links = ['branch', 'cloth']

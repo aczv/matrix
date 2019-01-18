@@ -34,7 +34,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv(), default='')
 # Application definition
 
 INSTALLED_APPS = [
-    'matrix.hive.apps.HiveConfig',
+    # 'matrix.hive.apps.HiveConfig',
     'matrix.clothing.apps.ClothingConfig',
     'rest_framework',
     'django.contrib.admin',

@@ -13,12 +13,3 @@ class ServerAdmin(admin.ModelAdmin):
 class SiteAdmin(admin.ModelAdmin):
     search_fields = ['name']
     list_display = ['name']
-
-
-# Matrix common settings
-
-from django.contrib import admin
-
-admin.site.site_header = "Matrix Admin"
-admin.site.site_title = "Matrix Admin Portal"
-admin.site.index_title = "Welcome to Matrix Researcher Portal"

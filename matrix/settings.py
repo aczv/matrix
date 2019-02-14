@@ -29,14 +29,13 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv(), default='')
+INTERNAL_IPS = config('INTERNAL_IPS', cast=Csv(), default='127.0.0.1')
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    # 'matrix.hive.apps.HiveConfig',
     'matrix.core.apps.CoreConfig',
-    'matrix.clothing.apps.ClothingConfig',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'matrix.urls'
@@ -109,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # https://docs.djangoproject.com/en/2.1/topics/auth/customizing/
-# AUTH_USER_MODEL = 'core.User'
+AUTH_USER_MODEL = 'core.User'
 
 
 # Internationalization
@@ -133,6 +134,8 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = Path(BASE_DIR, "../static/")
 
+MEDIA_ROOT = Path(BASE_DIR, '../media')
+
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
@@ -143,4 +146,3 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 50,
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
 }
-

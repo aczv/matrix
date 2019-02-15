@@ -2,7 +2,7 @@ import datetime
 from django.db import models
 
 import matrix.core.constants as constants
-from matrix.core.models import Contact
+from matrix.core.models import Country, Contact
 
 class Project(models.Model):
     name = models.CharField(max_length=100)
@@ -30,6 +30,7 @@ class Program(models.Model):
 class Deployment(models.Model):
     name = models.CharField(max_length=100)
     program = models.ForeignKey(Program, on_delete=models.CASCADE)
+    country = models.ForeignKey(Country, on_delete=models.SET_NULL, blank=True, null=True)
     url = models.URLField(blank=True)
 
     environment = models.CharField(

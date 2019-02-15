@@ -31,6 +31,7 @@ class Deployment(models.Model):
     program = models.ForeignKey(Program, on_delete=models.CASCADE)
     url = models.URLField(blank=True)
     comment = models.CharField(max_length=200, blank=True)
+    description = models.TextField(blank=True)
 
     def __str__(self):
         return self.name

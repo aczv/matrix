@@ -29,8 +29,7 @@ class Program(models.Model):
 class Deployment(models.Model):
     name = models.CharField(max_length=100)
     program = models.ForeignKey(Program, on_delete=models.CASCADE)
-    website_url = models.URLField(blank=True)
-    api_url = models.URLField(blank=True)
+    url = models.URLField(blank=True)
     comment = models.CharField(max_length=200, blank=True)
 
     def __str__(self):

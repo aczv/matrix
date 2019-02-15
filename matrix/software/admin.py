@@ -10,18 +10,20 @@ class DeploymentInline(admin.TabularInline):
     extra = 0
     show_change_link = True
     model = Deployment
-    fields = ['website_url', 'comment']
+    fields = ['name', 'url', 'comment']
 
 @admin.register(Program)
 class ProgramAdmin(admin.ModelAdmin):
-    list_display = ['name', 'contact']
+    list_display = ['name', 'project', 'comment', 'contact']
+    list_filter = ['project']
     search_fields = ['name']
     inlines = [DeploymentInline]
 
 @admin.register(Deployment)
 class DeploymentAdmin(admin.ModelAdmin):
-    list_display = ['name', 'program', 'website_url', 'api_url']
+    list_display = ['name', 'program', 'url', 'comment']
     list_filter = ['program']
+    search_fields = ['name', 'url']
     autocomplete_fields = ['program']
     save_as = True
 

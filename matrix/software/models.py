@@ -1,6 +1,7 @@
 import datetime
 from django.db import models
 
+import matrix.core.constants as constants
 from matrix.core.models import Contact
 
 class Project(models.Model):
@@ -30,6 +31,12 @@ class Deployment(models.Model):
     name = models.CharField(max_length=100)
     program = models.ForeignKey(Program, on_delete=models.CASCADE)
     url = models.URLField(blank=True)
+
+    environment = models.CharField(
+        max_length=30, default=constants.ENVIRONMENT_PRODUCTION,
+        choices=constants.ENVIRONMENT_CHOICES,
+    )
+
     comment = models.CharField(max_length=200, blank=True)
     description = models.TextField(blank=True)
 

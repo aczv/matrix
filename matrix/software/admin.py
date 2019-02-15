@@ -10,7 +10,7 @@ class DeploymentInline(admin.TabularInline):
     extra = 0
     show_change_link = True
     model = Deployment
-    fields = ['name', 'url', 'comment']
+    fields = ['name', 'url', 'environment', 'comment']
 
 @admin.register(Program)
 class ProgramAdmin(admin.ModelAdmin):
@@ -21,8 +21,8 @@ class ProgramAdmin(admin.ModelAdmin):
 
 @admin.register(Deployment)
 class DeploymentAdmin(admin.ModelAdmin):
-    list_display = ['name', 'program', 'url', 'comment']
-    list_filter = ['program', 'program__project']
+    list_display = ['name', 'program', 'url', 'environment', 'comment']
+    list_filter = ['program', 'program__project', 'environment']
     search_fields = ['name', 'url']
     autocomplete_fields = ['program']
     save_as = True

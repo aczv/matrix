@@ -45,4 +45,4 @@ class Deployment(models.Model):
         return self.name
 
     class Meta:
-        ordering = ['name']
+        ordering = ['program', 'environment', 'country', 'name']

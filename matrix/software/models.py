@@ -29,6 +29,20 @@ class ServerBase(models.Model):
 class AppServer(ServerBase):
     pass
 
+class SqlServer(ServerBase):
+    pass
+
+class Database(models.Model):
+    name = models.CharField(max_length=100)
+    sql_server = models.ForeignKey(SqlServer, on_delete=models.PROTECT)
+    comment = models.CharField(max_length=200, blank=True)
+
+    class Meta:
+        ordering = ['sql_server', 'name']
+
+    def __str__(self):
+        return "{} ({})".format(self.name, self.sql_server.name)
+
 # ==============================================================================
 # Programs & Deployments
 # ==============================================================================

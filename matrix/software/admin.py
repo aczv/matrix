@@ -22,7 +22,7 @@ class ProgramAdmin(admin.ModelAdmin):
 @admin.register(Deployment)
 class DeploymentAdmin(admin.ModelAdmin):
     list_display = ['name', 'program', 'url', 'environment', 'country', 'comment']
-    list_filter = ['program', 'program__project', 'environment']
+    list_filter = ['program', 'program__project', 'environment', 'country']
     search_fields = ['name', 'url']
     autocomplete_fields = ['program']
     save_as = True

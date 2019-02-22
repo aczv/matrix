@@ -24,6 +24,7 @@ class ServerBase(models.Model):
 
     def save(self, *args, **kwargs):
         self.name = self.name.upper()
+        self.domain_name = self.domain_name.lower()
         super().save(*args, **kwargs)
 
 class AppServer(ServerBase):

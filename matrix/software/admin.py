@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.urls import reverse
 
 from .models import AppServer, SqlServer, Database
 from .models import Project, Program, Deployment
@@ -10,7 +11,8 @@ from .models import Project, Program, Deployment
 @admin.register(AppServer)
 class AppServerAdmin(admin.ModelAdmin):
     search_fields = ['name', 'ip_address', 'domain_name', 'comment']
-    list_display = ['name', 'ip_address', 'domain_name', 'comment', 'get_deployment_count']
+    list_display = ['name', 'ip_address', 'domain_name', 'country', 'comment', 'get_deployment_count']
+    list_select_related = ['country']
 
     def get_deployment_count(self, obj):
         return obj.deployment_set.count()
@@ -39,7 +41,7 @@ class DeploymentInline(admin.TabularInline):
 @admin.register(Program)
 class ProgramAdmin(admin.ModelAdmin):
     search_fields = ['name', 'comment']
-    list_display = ['name', 'project', 'contact', 'comment', 'get_deployment_count']
+    list_display = ['name', 'project', 'contact', 'comment', 'get_deployment_count', 'get_deployments_url']
     list_filter = ['project', 'contact']
     inlines = [DeploymentInline]
 
@@ -47,11 +49,15 @@ class ProgramAdmin(admin.ModelAdmin):
         return obj.deployment_set.count()
     get_deployment_count.short_description = 'Deployments'
 
+    def get_deployments_url(self, obj):
+        return reverse('admin:software_deployment_changelist', kwargs={'program__id__exact': obj.pk})
+
 @admin.register(Deployment)
 class DeploymentAdmin(admin.ModelAdmin):
-    search_fields = ['name', 'url']
+    # search_fields = ['name', 'url']
     list_display = ['name', 'program', 'environment', 'country', 'url', 'get_project', 'get_appserver', 'comment']
     list_display_links = ['name']
+    list_select_related = ['program', 'country', 'program__project', 'app_server']
     list_filter = ['program__project', 'environment', 'country', 'app_server', 'program']
     autocomplete_fields = ['program', 'app_server']
     save_as = True
@@ -59,12 +65,12 @@ class DeploymentAdmin(admin.ModelAdmin):
     def get_project(self, obj):
         return obj.program.project
     get_project.short_description = 'Project'
-    get_project.admin_order_field = 'program__project'
+    # get_project.admin_order_field = 'program__project'
 
     def get_appserver(self, obj):
         return obj.app_server
     get_appserver.short_description = 'App server'
-    get_appserver.admin_order_field = 'app_server__name'
+    # get_appserver.admin_order_field = 'app_server__name'
 
 # ==============================================================================
 # ProjectAdmin

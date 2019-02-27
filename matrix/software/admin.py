@@ -122,17 +122,12 @@ class ProgramAdmin(admin.ModelAdmin):
 @admin.register(Deployment)
 class DeploymentAdmin(admin.ModelAdmin):
     # search_fields = ['name', 'url']
-    list_display = ['name', 'program', 'environment', 'country', 'url', 'get_project', 'get_appserver', 'comment']
+    list_display = ['name', 'program', 'environment', 'country', 'url', 'get_appserver', 'comment']
     list_display_links = ['name']
-    list_select_related = ['program', 'country', 'program__project', 'app_server']
+    list_select_related = ['program', 'country', 'app_server']
     list_filter = ['program__project', 'environment', 'country', 'app_server', 'program']
     autocomplete_fields = ['program', 'app_server']
     save_as = True
-
-    def get_project(self, obj):
-        return obj.program.project
-    get_project.short_description = 'Project'
-    # get_project.admin_order_field = 'program__project'
 
     def get_appserver(self, obj):
         return obj.app_server

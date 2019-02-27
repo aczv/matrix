@@ -121,7 +121,7 @@ class ProgramAdmin(admin.ModelAdmin):
 
 @admin.register(Deployment)
 class DeploymentAdmin(admin.ModelAdmin):
-    # search_fields = ['name', 'url']
+    search_fields = ['name', 'url']
     list_display = ['name', 'program', 'environment', 'country', 'url', 'app_server', 'comment']
     list_display_links = ['name']
     list_select_related = ['program', 'country', 'app_server']

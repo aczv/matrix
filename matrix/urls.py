@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
 
-from matrix.software.views import projects
+from matrix.software.views import projects, deployments
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +25,5 @@ urlpatterns = [
 
 urlpatterns += [
     url(r'^projects/', projects),
+    url(r'^deployments/', deployments),
 ]

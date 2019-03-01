@@ -37,14 +37,15 @@ INTERNAL_IPS = config('INTERNAL_IPS', cast=Csv(), default='127.0.0.1')
 INSTALLED_APPS = [
     'matrix.core.apps.CoreConfig',
     'matrix.software.apps.SoftwareConfig',
-    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     # 'debug_toolbar',
+    'django_tables2',
 ]
 
 MIDDLEWARE = [

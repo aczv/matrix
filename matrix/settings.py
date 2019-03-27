@@ -84,13 +84,16 @@ WSGI_APPLICATION = 'matrix.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': config(
-        'DATABASE_URL',
-        default='sqlite:///' + BASE_DIR.parent.child('db.sqlite3'),
-        cast=db_url
-    )
+    'default': config('DATABASE_URL', cast=db_url),
 }
 
+def fixOdbcDriver(db):
+    if db['ENGINE'] == 'sql_server.pyodbc':
+        db['OPTIONS'] = {
+            'driver': 'ODBC Driver 17 for SQL Server',
+        }
+
+fixOdbcDriver(DATABASES['default'])
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

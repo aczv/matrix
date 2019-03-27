@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  web:
+    image: sanitex/matrix
+    build: .
+    volumes:
+      - ./.env:/app/.env:ro
+    networks:
+      - prod
+    ports:
+      - "${PORT}:8000"
+    restart: always
+
+networks:
+  prod:
+    external: true

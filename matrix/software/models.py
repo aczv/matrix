@@ -1,5 +1,6 @@
 import datetime
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 import matrix.core.constants as constants
 from matrix.core.models import Country, Contact
@@ -83,6 +84,11 @@ class Deployment(models.Model):
     app_server = models.ForeignKey(AppServer, on_delete=models.SET_NULL, blank=True, null=True)
     comment = models.CharField(max_length=200, blank=True)
     description = models.TextField(blank=True)
+    is_active = models.BooleanField(
+        _('Is active'),
+        default=True,
+        help_text=_('Designates whether the deployment is active.'),
+    )
 
     def __str__(self):
         return self.name

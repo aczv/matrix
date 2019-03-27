@@ -86,8 +86,8 @@ class DeploymentInline(admin.TabularInline):
     extra = 0
     show_change_link = True
     model = Deployment
-    fields = ['name', 'url', 'environment', 'country', 'comment']
-    classes = ['collapse']
+    fields = ('name', 'url', 'environment', 'country', 'comment')
+    classes = ('collapse',)
 
 @admin.register(Program)
 class ProgramAdmin(admin.ModelAdmin):
@@ -120,12 +120,13 @@ class ProgramAdmin(admin.ModelAdmin):
 
 @admin.register(Deployment)
 class DeploymentAdmin(admin.ModelAdmin):
-    search_fields = ['name', 'url']
-    list_display = ['name', 'program', 'environment', 'country', 'url', 'app_server', 'comment']
-    list_display_links = ['name']
-    list_select_related = ['program', 'country', 'app_server']
-    list_filter = ['program__project', 'environment', 'country', 'app_server', 'program']
-    autocomplete_fields = ['program', 'app_server']
+    search_fields = ('name', 'url')
+    list_display = ('name', 'program', 'environment', 'country', 'url',
+        'app_server', 'comment', 'is_active')
+    list_display_links = ('name',)
+    list_select_related = ('program', 'country', 'app_server')
+    list_filter = ('program__project', 'environment', 'country', 'app_server', 'program', 'is_active')
+    autocomplete_fields = ('program', 'app_server')
     save_as = True
 
 # ==============================================================================

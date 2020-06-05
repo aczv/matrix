@@ -9,7 +9,7 @@ django-pyodbc-azure==2.1.0.0
 django-tables2==2.0.6
 django-templated-email==2.3.0
 django-timezone-field==3.1
-Django==2.1.15
+Django==2.2.13
 djangorestframework==3.9.3
 gunicorn==19.9.0
 Markdown==3.1
